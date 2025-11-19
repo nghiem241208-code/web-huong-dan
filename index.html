@@ -3,201 +3,229 @@
 <head>
     
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trang chủ</title>
+<title>Trang chủ - Notion Style</title>
 
 <style>
+    /* 🔴 BIẾN CHUẨN HÓA - NOTION BLUE */
+    :root {
+        --primary-accent: #0A6CFF; 
+        --secondary-accent: #f0f7ff; 
+        --bg-color: #F7F7F7; 
+        --card-bg: #FFFFFF; 
+        --text-color: #1E1E1E; 
+        --shadow: 0 4px 10px rgba(0, 0, 0, 0.08); 
+        --border-radius: 10px;
+    }
+
     body {
-        font-family: "Segoe UI", sans-serif;
+        font-family: 'Segoe UI', Arial, sans-serif;
         margin: 0;
-        background: #f0f6ff;
-        color: #2c3e50;
+        background: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.7; 
     }
-
-
-    /* Header */
-    .header {
-        padding: 50px 20px;
+    
+    /* 💥 SPLASH SCREEN */
+    #splash-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--card-bg); 
+        color: var(--text-color);
+        z-index: 9999; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
         text-align: center;
-        background: linear-gradient(135deg, #d55eb3, #ed79d0);
-        color: white;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        opacity: 1;
+        transition: opacity 0.5s ease-out; 
+        padding: 20px;
+        box-sizing: border-box;
     }
-    .header h1 {
-        font-size: 36px;
+
+    #splash-screen.fade-out { opacity: 0; }
+
+    #splash-screen .splash-icon {
+        width: 60px; 
+        height: 60px;
+        margin-bottom: 25px; 
+        animation: spin 1.5s linear infinite; 
+        color: var(--primary-accent);
+        border: 4px solid var(--secondary-accent);
+        border-top: 4px solid var(--primary-accent);
+        border-radius: 50%;
+    }
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    #splash-screen h1 {
+        font-size: clamp(24px, 5vw, 40px);
         margin: 0;
         font-weight: 700;
+        color: var(--text-color); 
+        max-width: 90%; 
+        padding: 0 10px;
+    }
+    
+    /* Header - Phần trên cùng */
+    .header {
+        padding: 90px 20px 50px; 
+        text-align: center;
+        background: var(--card-bg);
+        border-bottom: 1px solid #E0E0E0;
+    }
+    .header h1 {
+        font-size: clamp(32px, 7vw, 50px);
+        margin: 0 auto 18px auto; 
+        font-weight: 800;
+        color: var(--primary-accent);
     }
     .header p {
-        margin-top: 10px;
-        font-size: 18px;
-        opacity: 0.95;
+        margin-top: 0;
+        font-size: clamp(18px, 2.5vw, 22px);
+        color: #555;
     }
-  /* Nav */
-header{position:sticky;top:0;z-index:1200;background:rgba(0,0,0,0.55);
-backdrop-filter:blur(6px);color:white;padding:18px 12px;text-align:center;
-box-shadow:0 6px 20px rgba(2,44,67,0.18);}
-nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:8px 0;background:rgb(235, 61, 168);}
-nav a{color:white;text-decoration:none;padding:10px 14px;border-radius:8px;font-weight:600;transition:.25s}
-nav a:hover{transform:translateY(-3px);background:var(--accent-2)}
+
+    /* Nav Bar - Sticky */
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px; 
+        justify-content: center;
+        padding: 18px 10px; 
+        background: var(--card-bg); 
+        border-bottom: 1px solid #E0E0E0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    }
+    nav a {
+        color: var(--text-color);
+        text-decoration: none;
+        padding: 10px 18px; 
+        border-radius: 6px;
+        font-weight: 600;
+        transition: 0.2s;
+        border: 1px solid transparent;
+    }
+    nav a:hover {
+        background: var(--secondary-accent);
+        color: var(--primary-accent);
+        border-color: var(--primary-accent);
+    }
 
 
-    /* Grid các mục */
+    /* ✅ MENU 4 MỤC DẠNG CHUỖI (BENTO BOX) */
     .menu-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 25px;
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 30px;
         max-width: 1000px;
-        margin: 40px auto;
-        padding: 0 20px;
+        margin: 50px auto; 
+        padding: 0 25px;
     }
 
     .menu-item {
-        background: white;
-        padding: 30px;
-        border-radius: 18px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        text-align: center;
-        font-size: 20px;
-        font-weight: 600;
+        background: var(--card-bg);
+        padding: 40px 30px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
         cursor: pointer;
-        transition: 0.25s;
-        border: 2px solid transparent;
+        transition: 0.3s;
+        border: 1px solid #E0E0E0;
+        color: var(--text-color);
+        text-decoration: none;
+        
+        display: flex;
+        align-items: center; 
+        text-align: left;
     }
 
     .menu-item:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-        border-color: #bf5ead;
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        border-color: var(--primary-accent);
+        background: var(--secondary-accent);
     }
 
     .menu-item img {
-        width: 60px;
-        margin-bottom: 15px;
-        opacity: 0.9;
+        width: 45px; 
+        height: 45px;
+        margin-right: 20px; 
+        flex-shrink: 0;
+    }
+    
+    .menu-item span {
+        font-size: 1.2em; 
+        font-weight: 700;
+        color: var(--text-color); 
     }
 
-    /* Giới thiệu */
+
+    /* Giới thiệu - Dùng nền nhẹ để tách biệt (Notion style) */
     .intro-box {
         max-width: 1000px;
-        margin: 40px auto 80px;
-        background: white;
-        padding: 40px;
-        border-radius: 18px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        font-size: 18px;
-        line-height: 1.7;
+        margin: 50px auto 100px; 
+        background: var(--card-bg); 
+        padding: 45px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        font-size: 18px; 
+        line-height: 1.8; 
+        border: 1px solid #E0E0E0;
     }
 
     .intro-box h2 {
-        color: #2176ff;
-        margin-bottom: 15px;
-        font-size: 26px;
+        color: var(--primary-accent);
+        margin-bottom: 20px; 
+        font-size: 28px; 
+        font-weight: 700;
+        border-bottom: 2px solid var(--secondary-accent); 
+        padding-bottom: 12px; 
     }
-    /* ======================================= */
-/* MEDIA QUERY CHO THIẾT BỊ DI ĐỘNG (MOBILE) */
-/* ======================================= */
-@media (max-width: 768px) {
-
-    /* HEADER */
-    .header {
-        padding: 30px 15px;
+    
+    /* 📱 MEDIA QUERY CHO THIẾT BỊ DI ĐỘNG */
+    @media (max-width: 768px) {
+        .menu-grid {
+            grid-template-columns: 1fr; 
+            gap: 20px;
+            padding: 15px;
+        }
+        
+        .header {
+             padding: 40px 15px 20px;
+        }
+        .intro-box {
+            margin: 20px 15px 40px;
+            padding: 30px;
+        }
+        .menu-item {
+            padding: 30px 20px;
+        }
     }
-    .header h1 {
-        font-size: 28px;
-    }
-    .header p {
-        font-size: 16px;
-    }
-
-    /* NAV */
-    nav {
-        padding: 10px;
-        gap: 6px;
-    }
-    nav a {
-        flex: 1 1 45%;
-        text-align: center;
-        font-size: 14px;
-        padding: 8px 10px;
-    }
-
-    /* MENU GRID */
-    .menu-grid {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 15px;
-        padding: 10px;
-        margin: 20px 10px;
-    }
-
-    .menu-item {
-        padding: 20px;
-        font-size: 16px;
-    }
-    .menu-item img {
-        width: 50px;
-    }
-
-    /* INTRO BOX */
-    .intro-box {
-        padding: 20px;
-        margin: 20px 10px;
-        font-size: 16px;
-    }
-}
-
-}
 
 </style>
 
 </head>
 <body>
-    <!-- Splash Screen -->
-<div id="splash">
-    <div class="splash-content">
-        <h1 class="fade-text">Chào mừng bạn đến với Website!</h1>
-        <p class="fade-text">Website AI hỗ trợ học tập thông minh</p>
+    
+    <div id="splash-screen">
+        <div class="splash-icon"></div> 
+        <h1>ĐIỀU CHỈNH HÀNH VI SỬ DỤNG CHATGPT TRONG HỌC TẬP</h1>
+        <p>Đang tải giao diện Notion-Inspired...</p>
     </div>
-</div>
-
-<style>
-#splash {
-    position: fixed;
-    inset: 0;
-    background: #da85c2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    animation: splashFade 3.2s forwards ease-out;
-}
-
-/* Hiệu ứng chữ hiện dần */
-.fade-text {
-    color: #fff;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    animation: fadeIn 1.5s ease-out forwards;
-}
-
-/* Hiện chữ 0 → 100% */
-@keyframes fadeIn {
-    0% { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-
-/* Mờ dần toàn màn hình */
-@keyframes splashFade {
-    0%, 85% { opacity: 1; }
-    100% { opacity: 0; visibility: hidden; }
-}
-</style>
 
     <div class="header">
         <h1>ĐIỀU CHỈNH HÀNH VI SỬ DỤNG CHATGPT TRONG HỌC TẬP</h1>
-        <p>Tác giả: Võ Phú Thịnh-11A10 và Nguyễn Ngọc Vân Anh-11A7 | Mã dự án:…
-        </p>
+        <p>Tác giả: Võ Phú Thịnh-11A10 và Nguyễn Ngọc Vân Anh-11A7 | Mã dự án:...</p>
     </div>
     <nav>
         <a href="index.html">TRANG CHỦ</a>
@@ -207,57 +235,7 @@ nav a:hover{transform:translateY(-3px);background:var(--accent-2)}
         <a href="muc4.html">GIẢI PHÁP</a>
     </nav>
 
-<title>Menu Grid</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #eef3ff;
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            padding: 20px;
-        }
-
-        .menu-item {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            color: #000;
-            text-decoration: none;
-
-            /* Căn giữa icon + chữ */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-            /* Hiệu ứng hover */
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.15);
-            transition: 0.2s;
-        }
-
-        .menu-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0px 6px 15px rgba(0,0,0,0.2);
-        }
-
-        .menu-item img {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 10px;
-        }
-    </style>
-
-    </head>
-    <body>
-
     <div class="menu-grid">
-
         <a href="muc1.html" class="menu-item">
             <img src="https://cdn3.iconfinder.com/data/icons/design-thinking/64/17_project_details-64.png">
             <span>TỔNG QUAN VỀ CHAT GPT</span>
@@ -290,5 +268,30 @@ nav a:hover{transform:translateY(-3px);background:var(--accent-2)}
         </p>
     </div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const splash = document.getElementById('splash-screen');
+        
+        // --- LOGIC MỚI: CHỈ HIỆN 1 LẦN DÙNG sessionStorage ---
+        
+        // 1. Kiểm tra session storage. Nếu đã hiện splash, ẩn ngay lập tức và kết thúc.
+        if (sessionStorage.getItem('splashShown') === 'true') {
+            splash.style.display = 'none';
+            return; 
+        }
+
+        // 2. Nếu chưa hiện (lần đầu truy cập), chạy hiệu ứng fade-out
+        setTimeout(() => {
+            splash.classList.add('fade-out');
+            
+            // Đặt cờ vào session storage để lần sau không hiện nữa
+            sessionStorage.setItem('splashShown', 'true'); 
+            
+            setTimeout(() => {
+                splash.style.display = 'none';
+            }, 500); 
+        }, 1500); 
+    });
+</script>
 </body>
 </html>

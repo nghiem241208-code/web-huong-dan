@@ -3,179 +3,110 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NGUYÊN TẮC SỬ DỤNG CHAT GPT TRONG HỌC TẬP</title>
+<title>GIẢI PHÁP SỬ DỤNG CHAT GPT</title>
 
 <style>
-    /* VARIABLES - PINK THEME (Standardized) */
+    /* 🔴 BIẾN CHUẨN HÓA - NOTION BLUE */
     :root {
-        --primary-color: #ff3399; /* Pink đậm */
-        --accent-color: #ff66b3; /* Pink vừa */
-        --light-bg: #fff0f7; /* Light Pink Background */
-        --text-color: #2c3e50;
-        --shadow: 0 4px 15px rgba(0,0,0,0.1);
-        --border-radius: 14px;
+        --primary-accent: #0A6CFF; 
+        --secondary-accent: #f0f7ff; 
+        --bg-color: #F7F7F7; 
+        --card-bg: #FFFFFF; 
+        --text-color: #1E1E1E; 
+        --shadow: 0 4px 10px rgba(0, 0, 0, 0.08); 
+        --border-radius: 10px;
     }
 
     body {
         font-family: 'Segoe UI', Arial, sans-serif;
         margin: 0;
-        background: #f6f6f6;
+        background: var(--bg-color);
         color: var(--text-color);
+        line-height: 1.6;
     }
 
-    /* Nav Bar */
+    /* Nav Bar - Sticky */
     nav {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 12px;
         justify-content: center;
-        padding: 15px 0;
-        background: #ffb3d9; 
-        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        padding: 15px 10px;
+        background: var(--card-bg); 
+        border-bottom: 1px solid #E0E0E0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.03);
     }
     nav a {
-        color: white;
+        color: var(--text-color);
         text-decoration: none;
-        padding: 10px 14px;
-        border-radius: 8px;
+        padding: 8px 15px;
+        border-radius: 6px;
         font-weight: 600;
-        transition: 0.25s;
-        background: var(--primary-color);
+        transition: 0.2s;
+        border: 1px solid transparent;
     }
     nav a:hover {
-        transform: translateY(-2px);
-        background: var(--accent-color);
+        background: var(--secondary-accent);
+        color: var(--primary-accent);
+        border-color: var(--primary-accent);
     }
 
-    /* Khung nội dung chính */
+    /* Khung nội dung chính (Container) */
     .container {
-        max-width: 960px; 
+        max-width: 600px; /* Hẹp hơn để tập trung vào các nút bấm */
         margin: 40px auto;
-        background: white;
-        padding: 40px;
-        border-radius: var(--border-radius);
-        box-shadow: var(--shadow);
+        padding: 0 20px;
     }
 
     h1 {
-        color: var(--primary-color);
+        color: var(--primary-accent);
         text-align: center;
-        margin-bottom: 30px;
-        font-weight: 700;
-        border-bottom: 2px solid #eee;
+        margin-bottom: 40px;
+        font-weight: 800;
+        border-bottom: 2px solid var(--secondary-accent);
         padding-bottom: 15px;
         font-size: 32px;
     }
     
-    /* NEW FLEXBOX LAYOUT: Buttons Left, Image Right */
-    .main-layout {
-        display: flex;
-        gap: 30px;
-        align-items: flex-start; /* Căn trên cùng */
-    }
-    
-    /* Cột bên trái: Chứa 2 nút liên kết */
-    .left-column {
-        flex-grow: 1; 
+    /* ✅ LAYOUT 3 Ô LINK (Dạng Dọc) */
+    .link-list {
         display: flex;
         flex-direction: column;
-        gap: 25px; /* Khoảng cách giữa các nút */
-        padding-top: 15px; /* Cân bằng với vị trí ảnh */
+        gap: 20px;
     }
     
-    /* Cột bên phải: Chứa ảnh */
-    .image-box {
-        flex-shrink: 0; 
-        width: 350px; /* Kích thước cố định cho ảnh */
-        background: var(--accent-color);
+    .link-card {
+        background: var(--card-bg);
+        padding: 25px 30px;
         border-radius: var(--border-radius);
-        overflow: hidden;
         box-shadow: var(--shadow);
-        padding: 15px;
-    }
-
-    .image-box img {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-        border-radius: 8px;
-        display: block;
-    }
-    
-    /* Buttons (áp dụng cho thẻ <a>) */
-    .btn {
-        padding: 18px 30px; /* Tăng padding để nút to và rõ ràng hơn */
-        background: var(--primary-color);
-        color: white;
-        border-radius: 8px; 
-        cursor: pointer;
+        border: 1px solid #E0E0E0;
+        transition: 0.3s;
+        text-decoration: none;
+        color: var(--text-color);
+        display: flex;
+        align-items: center;
         font-size: 18px;
         font-weight: 700;
-        transition: 0.3s transform, 0.3s background;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        text-align: center; 
-        width: 100%;
-        box-sizing: border-box;
-        
-        /* Đảm bảo thẻ <a> hiển thị như một button */
-        text-decoration: none; 
-        display: inline-block; 
     }
-
-    .btn:hover {
-        background: #ff0066; 
-        transform: translateY(-2px); 
-    }
-    @media (max-width: 768px) {
-
-    /* HEADER */
-    .header {
-        padding: 30px 15px;
-    }
-    .header h1 {
-        font-size: 28px;
-    }
-    .header p {
-        font-size: 16px;
-    }
-
-    /* NAV */
-    nav {
-        padding: 10px;
-        gap: 6px;
-    }
-    nav a {
-        flex: 1 1 45%;
-        text-align: center;
-        font-size: 14px;
-        padding: 8px 10px;
-    }
-
-    /* MENU GRID */
-    .menu-grid {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 15px;
-        padding: 10px;
-        margin: 20px 10px;
-    }
-
-    .menu-item {
-        padding: 20px;
-        font-size: 16px;
-    }
-    .menu-item img {
-        width: 50px;
-    }
-
-    /* INTRO BOX */
-    .intro-box {
-        padding: 20px;
-        margin: 20px 10px;
-        font-size: 16px;
-    }
-}
-
     
+    .link-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        border-color: var(--primary-accent);
+        background: var(--secondary-accent);
+    }
+
+    .link-icon {
+        color: var(--primary-accent);
+        font-size: 24px;
+        margin-right: 15px;
+        line-height: 1;
+    }
+
 </style>
 
 </head>
@@ -190,35 +121,29 @@
 </nav>
 
 <div class="container">
-    <h1>GIẢI PHÁP SỬ DỤNG CHAT GPT </h1>
+    <h1>GIẢI PHÁP VÀ NGUYÊN TẮC SỬ DỤNG</h1>
 
-    <div class="main-layout">
+    <div class="link-list">
         
-        <div class="left-column">
-            
-            <a href="https://www.canva.com/design/DAG4XmXG4Qg/FC5JPrrussKJ9kWyZ_IcmA/edit?utm_content=DAG4XmXG4Qg&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank" class="btn">
-                Cẩm nang Chat GPT người bạn học thông minh
-            </a>
+        <a href="https://www.canva.com/design/DAG4XmXG4Qg/FC5JPrrussKJ9kWyZ_IcmA/edit?utm_content=DAG4XmXG4Qg&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank" class="link-card">
+            <span class="link-icon">📚</span>
+            Cẩm nang Chat GPT người bạn học thông minh
+        </a>
 
-            <a href="https://www.facebook.com/share/g/1MEJdLh4dw/?mibextid=wwXIfr" target="_blank" class="btn">
-                Góc thảo luận
-            </a>
-            <a href="https://nghiem241208-code.github.io/Study------web/" class="btn">
-                Góc tự học
-            </a>
-            
-            <p style="margin-top: 30px; font-size: 14px; color: #f6f6f6;">
-            </p>
-            
-        </div>
-        
-        <div class="image-box">
-            <img src="https://images.unsplash.com/photo-1684369175809-f9642140a1bd?q=80&w=1842&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
-        </div>
-        
+        <a href="https://www.facebook.com/share/g/1MEJdLh4dw/?mibextid=wwXIfr" target="_blank" class="link-card">
+            <span class="link-icon">💬</span>
+            Tham gia Góc thảo luận
+        </a>
+
+        <a href="https://nghiem241208-code.github.io/Study------web/" target="_blank" class="link-card">
+            <span class="link-icon">💡</span>
+            Góc tự học (Website hỗ trợ)
+        </a>
+
     </div>
+    
+    
 
 </div>
-
 </body>
 </html>
