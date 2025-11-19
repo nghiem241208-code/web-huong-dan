@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TỔNG QUAN VỀ CHAT GPT</title>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+    :root {
+        --primary-color: #e83e8c; /* Fuchsia Pink - Màu chủ đạo */
+        --accent-color: #ff85a2; /* Light Pink - Màu nhấn */
+        --background-color: #f8f9fa; /* Light Gray */
+        --card-bg: white;
+        --text-color: #343a40;
+        --shadow: 0 4px 15px rgba(0,0,0,0.08);
+        --border-radius: 12px;
+    }
+
+    body {
+        font-family: 'Poppins', 'Segoe UI', sans-serif;
+        margin: 0;
+        background: var(--background-color);
+        color: var(--text-color);
+    }
+
+    /* Nav Bar - Pink Theme */
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+        padding: 15px 0;
+        background: var(--primary-color);
+        box-shadow: var(--shadow);
+    }
+    nav a {
+        color: white;
+        text-decoration: none;
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: 0.3s;
+        border: 2px solid transparent;
+    }
+    nav a:hover {
+        background: var(--accent-color);
+        border: 2px solid white;
+        transform: translateY(-2px);
+    }
+
+    /* Khung nội dung chính */
+    .container {
+        max-width: 960px;
+        margin: 40px auto;
+        background: var(--card-bg);
+        padding: 40px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+    }
+
+    h1 {
+        color: var(--primary-color);
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: 700;
+        border-bottom: 3px solid #eee;
+        padding-bottom: 15px;
+    }
+
+    /* Buttons */
+    .btn {
+        padding: 12px 24px;
+        background: var(--primary-color);
+        color: white;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        font-size: 16px;
+        border: none;
+        font-weight: 600;
+        transition: 0.3s transform, 0.3s background;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        min-width: 180px;
+    }
+
+    .btn:hover {
+        background: var(--accent-color); 
+        transform: translateY(-2px);
+    }
+    
+    /* Layout MUC 1: Buttons/Content Left, Image Right */
+    .header-layout {
+        display: flex;
+        justify-content: space-between; 
+        align-items: flex-start; /* Căn trên cùng */
+        gap: 30px;
+        margin-bottom: 30px;
+        padding: 10px;
+    }
+    
+    /* Container mới chứa nút và nội dung */
+    .left-column {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1; /* Cho phép cột này chiếm hết không gian còn lại */
+    }
+
+    .btn-group {
+        display: flex; 
+        flex-direction: row;
+        gap: 15px; 
+        align-items: center;
+        margin-bottom: 0; /* Đảm bảo không có khoảng cách thừa */
+    }
+    
+       /* Image Box Style (Ảnh Minh Họa) */
+       .image-box {
+        flex-grow: 1;
+        background: var(--accent-color);
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        position: sticky; /* Giữ ảnh cố định khi cuộn */
+        top: 20px;
+    }
+    
+    .image-box img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        opacity: 0.9; 
+        transition: opacity 0.3s;
+        display: block;
+    }
+
+
+    /* Khung thu gọn - ContentBox */
+    #contentBox {
+        margin-top: 20px; /* Giảm khoảng cách từ nút */
+        background: #fdeff4; 
+        padding: 25px;
+        border-radius: var(--border-radius);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        border-left: 5px solid var(--primary-color);
+        display: none;
+        animation: fadeIn 0.4s ease;
+    }
+
+    .content-row {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+    }
+    
+    .content-row img.icon {
+        width: 40px;
+        height: 40px;
+        flex-shrink: 0;
+        margin-top: 5px;
+    }
+
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+    ul li {
+        margin-bottom: 8px;
+        padding-left: 20px;
+        position: relative;
+    }
+    /* Ưu điểm - dấu check xanh */
+    ul li::before {
+        content: '✓'; 
+        color: #28a745; 
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+    }
+    
+    /* Hạn chế - dấu X đỏ */
+    #contentBox p:last-of-type ul li::before {
+        content: '✕'; 
+        color: #dc3545; 
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    /* ======================================= */
+/* MEDIA QUERY CHO THIẾT BỊ DI ĐỘNG (MOBILE) */
+/* ======================================= */
+@media (max-width: 768px) {
+    
+    /* 1. CHUYỂN BỐ CỤC TỪ NGANG SANG DỌC */
+    .header-layout, .main-layout {
+        flex-direction: column !important; 
+        gap: 20px !important; 
+    }
+
+    /* 2. ĐẢM BẢO CÁC CỘT CHIẾM 100% CHIỀU RỘNG */
+    .left-column, .btn-box, .btn-box-wrapper {
+        width: 100% !important; 
+        flex-shrink: 0 !important;
+        padding-top: 0 !important;
+        box-sizing: border-box; 
+    }
+    
+    /* 3. ĐIỀU CHỈNH CONTAINER CHÍNH */
+    .container {
+        padding: 20px 15px !important;
+        margin: 20px 0 !important;
+        max-width: 100% !important;
+        border-radius: 0 !important;
+    }
+
+    /* 4. XỬ LÝ ẢNH/VIDEO (Chuyển thành 100% và Hủy bỏ Sticky) */
+    .image-box, .video-box {
+        width: 100% !important;
+        position: relative !important; 
+        top: 0 !important;
+    }
+
+    /* 5. NÚT VÀ MENU */
+    /* Nút: đảm bảo nút không quá to, chiếm 100% chiều rộng */
+    .btn {
+        width: 100% !important;
+        box-sizing: border-box;
+        padding: 15px 20px !important;
+        font-size: 16px !important;
+    }
+    /* Thanh điều hướng (Nav) */
+    nav {
+        gap: 5px !important; 
+        padding: 10px !important;
+    }
+    nav a {
+        flex-basis: 45%; 
+        padding: 8px 10px !important;
+        font-size: 14px !important;
+        text-align: center;
+    }
+
+    /* 6. Lưới menu trong index.html */
+    .menu-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important; 
+        gap: 15px !important;
+        padding: 15px !important;
+    }
+    .menu-item {
+        font-size: 16px !important;
+        padding: 15px !important;
+    }
+    
+    /* Điều chỉnh các hộp nội dung phụ */
+    .contentBox {
+        border-radius: 8px !important;
+        margin-bottom: 10px !important;
+    }
+    p {
+        text-align: left !important; 
+    }
+}
+</style>
+
+<script>
+function showContent() {
+    var box = document.getElementById("contentBox");
+    // Toggle hiển thị/ẩn nội dung
+    box.style.display = (box.style.display === "none" || box.style.display === "") ? "block" : "none";
+}
+</script>
+
+</head>
+<body>
+
+<nav>
+    <a href="index.html">TRANG CHỦ</a>
+    <a href="muc1.html">THÔNG TIN</a>
+    <a href="muc2.html">VAI TRÒ</a>
+    <a href="muc3.html">NHỮNG SAI LẦM</a>
+    <a href="muc4.html">GIẢI PHÁP </a>
+</nav>
+
+<div class="container">
+    <h1>TỔNG QUAN VỀ CHAT GPT</h1>
+
+    <div class="header-layout">
+        
+        <div class="left-column">
+            
+            <div class="btn-group">
+                <a href="https://chat.openai.com" target="_blank">
+                    <button class="btn">Truy cập Chat GPT</button>
+                </a>
+
+                <button class="btn" onclick="showContent()">Giới thiệu</button>
+            </div>
+            
+            <div id="contentBox">
+                <div class="content-row">
+                    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png" class="icon">
+                    <div>
+                        <p>
+                            ChatGPT là một hệ thống thông minh nhân tạo có thể hiểu và tạo ra ngôn ngữ như con người. Công cụ này giúp người dùng đặt câu hỏi, tìm kiếm thông tin, giải thích thông tin, và hỗ trợ người dùng trong quá trình học và học tập nhiều môn học khác nhau. ChatGPT hoạt động dựa trên những thông tin dữ liệu lớn để có thể đưa ra câu trả lời phù hợp với câu hỏi của người dùng. Nếu được sử dụng một cách hợp lý, ChatGPT có thể trở thành một trợ lý học tập thông minh và có ích cho học sinh.
+                        </p>
+                        <p>
+                            <strong>+Những ưu điểm và hạn chế của ChatGPT:</strong>
+                        </p>
+                        <p>
+                            <strong>a. Ưu điểm</strong>
+                            <ul>
+                                <li>Trả lời nhanh chóng và chính xác</li>
+                                <li>Cho phép người dùng cung cấp các chỉnh sửa tiếp theo</li>
+                                <li>Kiến thức sâu rộng về nhiều lĩnh vực</li>
+                                <li>Tương tác tự nhiên, cá nhân hóa cuộc trò chuyện</li>
+                                <li>Mở rộng kiến thức</li>
+                                <li>Được đào tạo để từ chối các yêu cầu không phù hợp</li>
+                            </ul>
+                        </p>
+                        <p>
+                            <strong>b. Hạn chế</strong>
+                            <ul>
+                                <li>Độ chính xác thông tin chưa tuyệt đối</li>
+                                <li>Hạn chế về ngôn ngữ</li>
+                                <li>Giới hạn trong xử lý nhóm từ phức tạp</li>
+                                <li>Dữ liệu bị giới hạn</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="image-box">
+            <img src="https://images.unsplash.com/photo-1679083216051-aa510a1a2c0e?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+        </div>
+    </div>
+    
+
+</div>
+</body>
+</html>
