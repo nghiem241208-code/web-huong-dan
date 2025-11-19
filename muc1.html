@@ -191,75 +191,54 @@
 /* MEDIA QUERY CHO THIẾT BỊ DI ĐỘNG (MOBILE) */
 /* ======================================= */
 @media (max-width: 768px) {
-    
-    /* 1. CHUYỂN BỐ CỤC TỪ NGANG SANG DỌC */
-    .header-layout, .main-layout {
-        flex-direction: column !important; 
-        gap: 20px !important; 
+
+    /* HEADER */
+    .header {
+        padding: 30px 15px;
+    }
+    .header h1 {
+        font-size: 28px;
+    }
+    .header p {
+        font-size: 16px;
     }
 
-    /* 2. ĐẢM BẢO CÁC CỘT CHIẾM 100% CHIỀU RỘNG */
-    .left-column, .btn-box, .btn-box-wrapper {
-        width: 100% !important; 
-        flex-shrink: 0 !important;
-        padding-top: 0 !important;
-        box-sizing: border-box; 
-    }
-    
-    /* 3. ĐIỀU CHỈNH CONTAINER CHÍNH */
-    .container {
-        padding: 20px 15px !important;
-        margin: 20px 0 !important;
-        max-width: 100% !important;
-        border-radius: 0 !important;
-    }
-
-    /* 4. XỬ LÝ ẢNH/VIDEO (Chuyển thành 100% và Hủy bỏ Sticky) */
-    .image-box, .video-box {
-        width: 100% !important;
-        position: relative !important; 
-        top: 0 !important;
-    }
-
-    /* 5. NÚT VÀ MENU */
-    /* Nút: đảm bảo nút không quá to, chiếm 100% chiều rộng */
-    .btn {
-        width: 100% !important;
-        box-sizing: border-box;
-        padding: 15px 20px !important;
-        font-size: 16px !important;
-    }
-    /* Thanh điều hướng (Nav) */
+    /* NAV */
     nav {
-        gap: 5px !important; 
-        padding: 10px !important;
+        padding: 10px;
+        gap: 6px;
     }
     nav a {
-        flex-basis: 45%; 
-        padding: 8px 10px !important;
-        font-size: 14px !important;
+        flex: 1 1 45%;
         text-align: center;
+        font-size: 14px;
+        padding: 8px 10px;
     }
 
-    /* 6. Lưới menu trong index.html */
+    /* MENU GRID */
     .menu-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important; 
-        gap: 15px !important;
-        padding: 15px !important;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 15px;
+        padding: 10px;
+        margin: 20px 10px;
     }
+
     .menu-item {
-        font-size: 16px !important;
-        padding: 15px !important;
+        padding: 20px;
+        font-size: 16px;
     }
-    
-    /* Điều chỉnh các hộp nội dung phụ */
-    .contentBox {
-        border-radius: 8px !important;
-        margin-bottom: 10px !important;
+    .menu-item img {
+        width: 50px;
     }
-    p {
-        text-align: left !important; 
+
+    /* INTRO BOX */
+    .intro-box {
+        padding: 20px;
+        margin: 20px 10px;
+        font-size: 16px;
     }
+}
+
 }
 </style>
 
