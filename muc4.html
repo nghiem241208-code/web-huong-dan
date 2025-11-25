@@ -25,7 +25,7 @@
         line-height: 1.6;
     }
 
-    /* Nav Bar - Sticky (GIỮ NGUYÊN) */
+    /* Nav Bar - Sticky */
     nav {
         display: flex;
         flex-wrap: wrap;
@@ -109,10 +109,10 @@
         line-height: 1;
     }
 
-    /* === KHU VỰC HIỂN THỊ NỘI DUNG (EXPANDED CONTENT) === */
+    /* === KHU VỰC HIỂN THỊ NỘI DUNG TÙY CHỈNH (EXPANDED CONTENT) === */
     .expanded-area {
-        max-width: 900px; 
-        margin: 0 auto 40px auto; /* Khoảng cách dưới */
+        max-width: 800px; /* Kích thước tối đa cho nội dung mở rộng */
+        margin: 0 auto 40px auto; 
         padding: 20px 0;
         text-align: center;
         border-top: 1px solid #E0E0E0;
@@ -134,18 +134,19 @@
     }
     
     .one-image-layout .main-button {
-        flex: 1 1 200px; /* Linh hoạt, tối thiểu 200px */
+        flex: 1 1 200px; 
         max-width: 350px;
     }
 
     .one-image-layout .image-card {
-        flex: 1 1 200px; /* Linh hoạt, tối thiểu 200px */
-        max-width: 450px;
-        height: 200px; /* Chiều cao cố định cho khung ảnh ngang */
+        flex: 1 1 200px; 
+        max-width: 400px; /* Điều chỉnh kích thước ảnh ngang */
+        height: 180px; /* Điều chỉnh chiều cao khung ảnh ngang */
         overflow: hidden;
         border-radius: var(--border-radius);
         box-shadow: var(--shadow);
         border: 1px solid #E0E0E0;
+        transition: 0.3s;
     }
     
     .one-image-layout .image-card img {
@@ -162,7 +163,7 @@
         grid-template-rows: auto auto;
         gap: 20px;
         margin-top: 30px;
-        max-width: 700px;
+        max-width: 750px; /* Điều chỉnh max-width cho layout 4 ảnh */
         margin-left: auto;
         margin-right: auto;
     }
@@ -173,11 +174,12 @@
         box-shadow: var(--shadow);
         overflow: hidden;
         border: 1px solid #E0E0E0;
+        transition: 0.3s;
     }
     
     .four-image-layout .image-card img {
         width: 100%;
-        height: 150px;
+        height: 150px; /* Giữ nguyên chiều cao cho ảnh thumbnail */
         object-fit: cover;
         display: block;
     }
@@ -186,10 +188,10 @@
         grid-area: 1 / 2 / 3 / 3; 
         align-self: center;
     }
-    .four-image-layout .image-card:nth-child(1) { grid-area: 1 / 1 / 2 / 2; } /* Top Left */
-    .four-image-layout .image-card:nth-child(2) { grid-area: 1 / 3 / 2 / 4; } /* Top Right */
-    .four-image-layout .image-card:nth-child(4) { grid-area: 2 / 1 / 3 / 2; } /* Bottom Left */
-    .four-image-layout .image-card:nth-child(5) { grid-area: 2 / 3 / 3 / 4; } /* Bottom Right */
+    .four-image-layout .image-card:nth-child(1) { grid-area: 1 / 1 / 2 / 2; }
+    .four-image-layout .image-card:nth-child(2) { grid-area: 1 / 3 / 2 / 4; }
+    .four-image-layout .image-card:nth-child(4) { grid-area: 2 / 1 / 3 / 2; }
+    .four-image-layout .image-card:nth-child(5) { grid-area: 2 / 3 / 3 / 4; }
 
     /* Nút Chung Cho Cả 3 Layout */
     .main-button a {
@@ -210,6 +212,14 @@
         transform: translateY(-2px);
         box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
     }
+    
+    /* Hiệu ứng hover cho hình ảnh */
+    .image-card:hover {
+        transform: scale(1.03);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        border-color: var(--primary-accent);
+    }
+
 
 </style>
 
@@ -261,7 +271,7 @@
         </div>
         
         <div class="image-card">
-            <img src="https://i.postimg.cc/g2MWbkZy/Screenshot-2025-11-25-at-13-56-38.png" >
+            <img src="https://i.postimg.cc/fR6hRq8t/Screenshot-2025-11-25-at-13-47-42.png" alt="Minh họa Cẩm nang">
         </div>
     </div>
 </div>
@@ -280,7 +290,7 @@
         </div>
         
         <div class="image-card">
-            <img src="https://i.postimg.cc/nV6rNTtR/585934968-122167099676749237-765603620934074649-n.jpg" alt="Minh họa Góc thảo luận">
+            <img src="https://i.postimg.cc/nV6rNTtR/585934968_122167099676749237_765603620934074649_n.jpg" alt="Minh họa Góc thảo luận">
         </div>
     </div>
 </div>
@@ -304,7 +314,7 @@
             <div class="main-button">
                 <a href="https://nghiem241208-code.github.io/web-huong-dan/" target="_blank">
                     <span style="margin-right: 10px;">🚀</span> 
-                      THỬ WEBSITE TỰ HỌC
+                     WEBSITE TỰ HỌC
                 </a>
             </div>
 
